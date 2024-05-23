@@ -25,4 +25,19 @@ export class UserService{
         return this._http.post(this.urlAPI+'user/login',params,options)
 
     }
+    getIdentityFromAPI():Observable<any>{
+        let headers;
+        let bearerToken=sessionStorage.getItem('token');
+        if(bearerToken){
+            headers=new HttpHeaders().set('Content-Type','application/x-www-form-urlencoded')
+                                    .set('bearertoken',bearerToken);            
+        }else{
+            headers=new HttpHeaders().set('Content-Type','application/x-www-form-urlencoded');            
+        }
+        let options={
+            headers
+        }
+        return this._http.get(this.urlAPI+'user/getidentity',options);
+        
+    }
 }
