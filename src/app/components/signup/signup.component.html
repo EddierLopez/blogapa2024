@@ -1,0 +1,44 @@
+<div class="col-md-12 mt-4">
+    <h3>Registro de usuario</h3>
+    <span>
+    @switch (status) {
+        @case (0) {
+            <div class="alert alert-success"><p>Registro exitoso!</p></div>
+        }
+        @case (1) {
+            <div class="alert alert-warning"><p>No se pudo agregar el usuario!</p></div>
+        }
+        @case (2) {
+            <div class="alert alert-danger"><p>Error de servidor!</p></div>
+        }
+    }
+    </span>
+    <form class="col-md-8 mx-auto" #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)">
+        <div class="form-group">            
+            <label for="name">Nombre</label>
+            <input id="name" type="text" #name="ngModel" class="form-control" name="name" 
+                pattern="^(?=.*[a-z])(?=.*[A-Z]).{4,}$" [(ngModel)]="user.name"/>
+            @if(!name.valid && name.touched){
+                <small class="invalid-feedback d-block">Formato invalido</small>
+            }       
+                    
+            <label for="last_name">Apellidos</label>
+            <input id="last_name" type="text" #last_name="ngModel" class="form-control" name="last_name" 
+                pattern="^(?=.*[a-z])(?=.*[A-Z]).{4,}$" [(ngModel)]="user.last_name"/>
+            @if(!last_name.valid && last_name.touched){
+                <small class="invalid-feedback d-block">Formato invalido</small>
+            }
+            <label for="email">Correo</label>
+            <input id="email" type="email" #email="ngModel" class="form-control" name="email" 
+                pattern="\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b" [(ngModel)]="user.email"/>
+                @if(!email.valid && email.touched){
+                    <small class="invalid-feedback d-block">Formato invalido</small>
+                }
+            <label for="password">Contraseña</label>
+            <input id="password" type="password" #password="ngModel" class="form-control" name="password"
+                [(ngModel)]="user.password">
+        </div>        
+        <input type="submit" class="btn btn-primary mt-2" value="Registrarse" [disabled]="signupForm.invalid">
+    </form>
+
+</div>
