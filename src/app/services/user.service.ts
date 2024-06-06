@@ -49,4 +49,12 @@ export class UserService{
         }
         return this._http.post(this.urlAPI+'user/signup',params,options);
     }
+    getIdentityFromStorage(){
+        let identity=sessionStorage.getItem('identity')
+        if(identity){
+            
+            return JSON.parse(identity)
+        }
+        return null
+    }
 }

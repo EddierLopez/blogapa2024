@@ -34,7 +34,7 @@ export class LoginComponent {
           this._userService.getIdentityFromAPI().subscribe({
             next:(resp:any)=>{
               console.log(resp);
-              sessionStorage.setItem('identity',resp);
+              sessionStorage.setItem('identity',JSON.stringify(resp));
               this._router.navigate(['']);
             },
             error:(error:Error)=>{
