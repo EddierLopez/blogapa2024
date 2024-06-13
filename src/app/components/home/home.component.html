@@ -1,5 +1,58 @@
-@if(!posts){
-
-}@else {
-    
+@if (!posts) {
+    <div class="loading" >
+        <p>Cargando....</p>
+      </div>
+}@else{
+    <div  class="container mt-5">
+        <h5 class="text-center">Posts de los Usuarios del Blog de la UNA</h5>
+        <div class="row d-flex">
+            <span >
+                <div class="col">
+            @for (post of posts; track $index) {
+            
+            <div class="card mb-4" style="width: 18rem;">
+              <div class="card-header mt-2">
+                <h6><a [routerLink]="['/post-detalle',post.id]">{{post.title}}</a></h6>
+              </div>
+              <div class="card-body" >
+                <div class="post-image w-100">
+                  <img src="{{url+'post/getimage/'+post.image}}" class="w-100">
+                </div>
+                <div class="post-buttons d-flex justify-content-center">
+                  <a class="btn btn-info" [routerLink]="['/post-detalle',post.id]">Leer</a>
+                  <span >
+                    @if(identity&&identity.iss==post.user_id){
+                        <a class="btn btn-warning" [routerLink]="['/editar-post',post.id]">Editar</a>
+                    <button type="button" class="btn btn-danger" (click)="openModal(post.id)">Borrar</button>
+                    
+                    }                    
+                  </span>
+                </div>
+              </div>
+            </div>
+        
+        }
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="deleteModalLabel">Confirmar Borrado</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  ¿Estás seguro de que deseas borrar el post?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="delete()" >Borrar</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+          </span>
+        </div>
+        </div>
+      
 }

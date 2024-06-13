@@ -57,4 +57,7 @@ export class UserService{
         }
         return null
     }
+    getToken(){
+        return sessionStorage.getItem('token')        
+    }
 }

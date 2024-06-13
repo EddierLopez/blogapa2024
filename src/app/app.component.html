@@ -43,9 +43,9 @@
                   {{identity.name}}
                 </a>
                 <div aria-labelledby="navDrop" class="dropdown-menu">
-                  <a class="dropdown-item">Nueva publicación</a>
+                  <a class="dropdown-item" [routerLink]="['nueva-publicacion']">Nueva publicación</a>
                   @if (identity&&identity.role==='admin_role') {
-                    <a class="dropdown-item">Usuarios</a>
+                    <a class="dropdown-item" [routerLink]="['configuracion-usuarios']">Usuarios</a>
                   }
 
                 </div>
